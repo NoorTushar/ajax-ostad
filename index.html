@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajax</title>
+  </head>
+  <body>
+    <h1>
+      We are going to display data on our P tag from an API using Fetch, Async,
+      Await.
+    </h1>
+    <button onclick="showData()">Show Data</button>
+    <p id="dataP"></p>
+
+    <script>
+      // https://crud.teamrabbil.com/api/v1/ReadProduct
+      async function showData() {
+        let url = "https://crud.teamrabbil.com/api/v1/ReadProduct";
+
+        let res = await fetch(url);
+
+        let resObj = await res.json();
+
+        let dataArray = resObj["data"];
+        let allNames = "";
+        dataArray.forEach((item) => {
+          allNames = allNames + item["ProductName"];
+        });
+
+        document.querySelector("#dataP").innerHTML = allNames;
+      }
+    </script>
+  </body>
+</html>
